@@ -1,0 +1,7 @@
+- Interfaz ICombatant + clase abstracta Character - Joaquin Augusto Salinas Tuesta [SaliJz]
+- Clase Player - Damaris Gaspar Acosta [Dati-S2]
+- Clase abstracta Enemy - Andre Daniel Pisfil Paredes [Mtrx283]
+- Clase MeleeEnemy - Belen Castrillon Peche [Belen Castrillon]
+- Clase RangedEnemy + Sistema de proyectil - Guillermo Claudio Barcelli Jordan [T4c0-PT]
+- Clase Game + sistema de turnos - Jamil Andre Cerrón Villafuerte [JamilCerron]
+- Diagrama de clases + pruebas de funcionamiento - Jeremy Kiel Chale Asmad [Jeremy Chale]
