@@ -1,11 +1,10 @@
-﻿using ConsoleApp2.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace Turn_Based_Game
 {
     public abstract class Enemy : Character
     {
