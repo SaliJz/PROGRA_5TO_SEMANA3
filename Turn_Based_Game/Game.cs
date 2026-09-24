@@ -4,12 +4,12 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace Clase3Progra
+//namespace Turn_Based_Game
 //{
 //    internal class Game
 //    {
 //        private Jugador nuevoJugador;
-//        private List<Enemigos> listaEnemigos = new List<Enemigos>();
+//        private List<Enemy> listaEnemigos = new List<Enemy>();
 
 //        public void Ejecutar()
 //        {
@@ -32,17 +32,21 @@
 
 //        public void CrearEnemigos()
 //        {
-//            Random randomAtributo = new Random();
+//            Random random = new Random();
+//            for (int i = 0; i < 3; i++)
+//            {
+//                int tipo = random.Next(0, 2);
+//                int randomAtributo = random.Next(20, 35);
 
-
-//            Enemigo enemigo1 = new Enemigo(randomAtributo.Next(20, 36), randomAtributo.Next(20, 36));
-//            Enemigo enemigo2 = new Enemigo(randomAtributo.Next(20, 36), randomAtributo.Next(20, 36));
-//            Enemigo enemigo3 = new Enemigo(randomAtributo.Next(20, 36), randomAtributo.Next(20, 36));
-
-//            listaEnemigos.Add(enemigo1);
-//            listaEnemigos.Add(enemigo2);
-//            listaEnemigos.Add(enemigo3);
-
+//                if (tipo == 0)
+//                {
+//                    listaEnemigos.Add(new EnemyMele(randomAtributo, randomAtributo));
+//                }
+//                else
+//                {
+//                    listaEnemigos.Add(new EnemyRange(randomAtributo, randomAtributo));
+//                }
+//            }
 //        }
 
 //        public void Combate()
@@ -54,7 +58,8 @@
 //                Console.WriteLine("Turno del Jugador");
 
 //                int i = 1;
-//                foreach (Enemigos enemigo in listaEnemigos)
+
+//                foreach (Enemy enemigo in listaEnemigos)
 //                {
 //                    Console.WriteLine($"{i}.{enemigo.name} || {enemigo.vida} de vida || {enemigo.daño} de daño");
 //                    i++;
@@ -64,7 +69,7 @@
 
 //                int numeroEscogido = int.Parse(Console.ReadLine());
 
-//                int dañoJugador = nuevoJugador.ObtenerDaño;
+//                int dañoJugador = nuevoJugador.GetDamage();
 
 //                listaEnemigos[numeroEscogido - 1].vida -= dañoJugador;
 
@@ -90,20 +95,44 @@
 //                {
 //                    Console.WriteLine("Turno del Enemigo");
 
-//                    foreach (Enemigos enemigo in listaEnemigos)
+//                    foreach (Enemy enemigo in listaEnemigos)
 //                    {
-//                        Console.WriteLine($"{enemigo.name} || {enemigo.vida} de vida || {enemigo.daño} de daño, ha atacado al jugador");
-
-//                        nuevoJugador.RecibirDaño(enemigo.daño);
-//                        Console.WriteLine("El jugador ha recibido daño");
-//                        Console.WriteLine($"Vida restante del jugador: {nuevoJugador.vida}");
-
-//                        if (nuevoJugador.vida <= 0)
+//                        if (enemigo is EnemyRange enemigoRango)
 //                        {
-//                            Console.WriteLine("El jugador ha muerto");
-//                            Console.WriteLine("DERROTA");
-//                            return;
+
+//                            if (enemigoRango.Shoot() != 0)
+//                            {
+//                                Console.WriteLine($"{enemigoRango.GetType().Name} || {enemigoRango.vida} de vida || {enemigoRango.daño} de daño, ha atacado al jugador");
+
+//                                nuevoJugador.TakeDamage(enemigo.GetDamage());
+//                                Console.WriteLine("El jugador ha recibido daño");
+//                                Console.WriteLine($"Vida restante del jugador: {nuevoJugador.Health}");
+
+//                                if (!nuevoJugador.IsAlive())
+//                                {
+//                                    Console.WriteLine("El jugador ha muerto");
+//                                    Console.WriteLine("DERROTA");
+//                                    return;
+//                                }
+//                            }
 //                        }
+
+//                        else
+//                        {
+//                            Console.WriteLine($"{enemigo.GetType().Name} || {enemigo.vida} de vida || {enemigo.daño} de daño, ha atacado al jugador");
+
+//                            nuevoJugador.TakeDamage(enemigo.GetDamage());
+//                            Console.WriteLine("El jugador ha recibido daño");
+//                            Console.WriteLine($"Vida restante del jugador: {nuevoJugador.Health}");
+
+//                            if (!nuevoJugador.IsAlive())
+//                            {
+//                                Console.WriteLine("El jugador ha muerto");
+//                                Console.WriteLine("DERROTA");
+//                                return;
+//                            }
+//                        }
+
 //                    }
 //                }
 //            }
